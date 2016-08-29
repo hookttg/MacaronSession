@@ -257,7 +257,13 @@ func (m *Manager) Start(ctx *macaron.Context) (RawStore, error) {
 	if len(sid) > 0 && m.provider.Exist(sid) {
 		return m.provider.Read(sid)
 	}
-
+	//add by HOOKTTG,20160829
+	//Fixed panic: a case, the browser has a cookie, but server not,
+	//then the server database will generate a useless cookie
+    	if len(sid) < 0{
+	    sid = m.sessionId()        
+    	}
+    	//end
 	sid = m.sessionId()
 	sess, err := m.provider.Read(sid)
 	if err != nil {
