@@ -264,7 +264,7 @@ func (m *Manager) Start(ctx *macaron.Context) (RawStore, error) {
 	    sid = m.sessionId()        
     	}
     	//end
-	sid = m.sessionId()
+	//sid = m.sessionId()//delete by HOOKTTG
 	sess, err := m.provider.Read(sid)
 	if err != nil {
 		return nil, err
